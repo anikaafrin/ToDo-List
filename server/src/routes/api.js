@@ -1,4 +1,5 @@
 import express from "express";
+import {check} from "express-validator";
 import Register from "../controllers/Register.controller.js";
 import { RegisterSchema } from "../validationSchema/RegisterSchema.js";
 import { LoginSchema } from "../validationSchema/LoginSchema.js";
@@ -11,7 +12,7 @@ apiRoute.post('/register',RegisterSchema,Register);
 apiRoute.post('/login',LoginSchema,Login);
 
 // protected routes
-apiProtected.post("/createTodo", createTodo);
+apiProtected.post("/createTodo",[check("desc", "Todo desc is required").exists()], createTodo);
 
 
 export default apiRoute; 
